@@ -25,7 +25,7 @@ def proof_of_work(last_proof):
 
     print("Searching for next proof")
     print(last_proof)
-    last_hash = str(hashlib.sha256(str(last_proof).encode()))
+    last_hash = hashlib.sha256(str(last_proof).encode()).hexdigest()
     proof = 0
     while not valid_proof(last_hash, proof):
         proof += 1
@@ -42,7 +42,7 @@ def valid_proof(last_hash, proof):
     IE:  last_hash: ...AE9123456, new hash 123456888...
     """
 
-    new_hash = str(hashlib.sha256(str(proof).encode()))
+    new_hash = hashlib.sha256(str(proof).encode()).hexdigest()
     return last_hash[-6:] == new_hash[:6]
 
 
